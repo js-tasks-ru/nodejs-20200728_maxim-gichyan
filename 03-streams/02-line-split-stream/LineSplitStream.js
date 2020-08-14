@@ -30,13 +30,3 @@ class LineSplitStream extends stream.Transform {
 }
 
 module.exports = LineSplitStream;
-
-const lines = new LineSplitStream({ encoding: 'utf-8' });
-lines.on('data', (chunk) => {
-  console.log(chunk);
-});
-lines.write('a');
-lines.write(`b${os.EOL}c`);
-lines.write(`d${os.EOL}e`);
-lines.write('f');
-lines.end();
