@@ -15,7 +15,7 @@ class LineSplitStream extends stream.Transform {
       this.push(this.lineBuffer + linesArray[0]);
       this.lineBuffer = '';
     }
-    // Пущем все промежуточнэе строки
+    // Пушем все промежуточные элементы
     for (const newChunk of linesArray.slice(1, linesArray.length - 1)) {
       this.push(newChunk);
     }
