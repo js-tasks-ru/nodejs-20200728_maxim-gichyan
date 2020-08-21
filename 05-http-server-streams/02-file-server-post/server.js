@@ -25,8 +25,6 @@ server.on('request', (req, res) => {
             .on('error', (err) => {
               writeFile.destroy();
               res.statusCode = 500;
-              res.statusCode = 500;
-              res.end();
               res.end();
             })
             .on('aborted', () => {
@@ -40,7 +38,7 @@ server.on('request', (req, res) => {
                 : (res.statusCode = 500);
               writeFile.destroy();
               fs.unlinkSync(filepath);
-              res.end();
+              res.end('too big');
             })
             .pipe(writeFile)
             .on('error', (err) => {
