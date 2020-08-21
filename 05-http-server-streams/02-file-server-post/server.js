@@ -33,7 +33,7 @@ server.on('request', (req, res) => {
               writeFile.destroy();
               fs.unlinkSync(filepath);
             })
-            .pipe(new limit_stream({ limit: 1024 * 1024 }))
+            .pipe(new limit_stream({ limit: 1000000 }))
             .on('error', (err) => {
               err.code === 'LIMIT_EXCEEDED'
                 ? (res.statusCode = 413)
