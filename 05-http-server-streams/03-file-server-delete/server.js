@@ -15,14 +15,17 @@ server.on('request', (req, res) => {
     const filepath = path.join(__dirname, 'files', pathname);
     switch (req.method) {
       case 'DELETE':
-        if (fs.existsSync(filepath)) {
-          fs.unlinkSync(filepath);
-          res.statusCode = 200;
-          res.end();
-        } else {
-          res.statusCode = 404;
-          res.end();
-        }
+        fs.unlink(filepath, (err) => {
+          if (err) {
+            err.code === 'ENOENT'
+              ? (res.statusCode = 404)
+              : (res.statusCode = 500);
+            res.end();
+          } else {
+            res.statusCode = 200;
+            res.end();
+          }
+        });
         break;
       default:
         res.statusCode = 501;
