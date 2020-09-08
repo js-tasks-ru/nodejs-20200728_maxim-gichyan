@@ -28,8 +28,6 @@ module.exports.confirm = async (ctx, next) => {
   if (!user)
     ctx.throw(401, 'Ссылка подтверждения недействительна или устарела');
   user.verificationToken = undefined;
-  ctx.request.body.email = user.email;
-  ctx.request.body.password = '*';
   await user.save();
   const token = await ctx.login(user);
   ctx.body = { token };
